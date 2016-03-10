@@ -77,6 +77,18 @@ syntax on
 colorscheme desert
 set nobackup
 set autoread
+set mouse=v
+set ignorecase
+
+" 状态栏
+set laststatus=2      " 总是显示状态栏
+" highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
+" 获取当前路径，将$HOME转化为~
+function! CurDir()
+	let curdir = substitute(getcwd(), $HOME, "~", "g")
+	return curdir
+endfunction
+set statusline=%{CurDir()}\/%f%m%r%h\ %=\|\%l,%c\ %p%%\|ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\|\\".&fenc)}\|%{$USER}@%{hostname()}
 
 " Plugin Setting
 let Tlist_Show_One_File=1
@@ -87,7 +99,7 @@ let g:miniBufExplorerMoreThanOne=0
 set tags=tags; 
 set autochdir
 
-let g:winManagerWindowLayout='FileExplorer|TagList' " 设置窗口布局
+let g:winManagerWindowLayout='TagList' " 设置窗口布局
 let g:winManagerWidth = 30
 map <F12> :WMToggle<cr>
 imap <F12> <esc><f12>a
@@ -120,7 +132,7 @@ nmap <M-g> :YcmCompleter GoToDefinitionElseDeclaration <C-R>=expand("<cword>")<C
 let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_global_ycm_extra_conf = '/root/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 """"""""""syntastic""""""""""""  
 let g:syntastic_check_on_open = 1  
